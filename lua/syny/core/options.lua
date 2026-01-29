@@ -72,3 +72,18 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- QML fold since treesitter no qml, Check origami ?
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "qml", "qmljs" },
+	callback = function()
+		-- Option A: Fold by Braces (Your specific request)
+		vim.opt_local.foldmethod = "marker"
+		vim.opt_local.foldmarker = "{,}"
+
+		-- Option B: Fold by Indent (Usually cleaner for QML)
+		-- vim.opt_local.foldmethod = "indent"
+
+		vim.opt_local.foldlevel = 99 -- Start with all folds open
+	end,
+})
