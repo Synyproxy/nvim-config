@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.opt.makeprg = "cmake --build build"
 -- Folding LSP
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"

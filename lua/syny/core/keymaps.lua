@@ -52,3 +52,9 @@ vim.keymap.set("n", "<leader>rp", vim.diagnostic.goto_prev, opts)
 -- Show diagnostic popup on hover
 vim.o.updatetime = 250 -- ms to wait before CursorHold triggers
 vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]])
+
+-- Go to definition
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+vim.keymap.set("n", "gp", vim.lsp.buf.references, { desc = "Go to References" })
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Documentation" })
+-- Ctrl o go back
