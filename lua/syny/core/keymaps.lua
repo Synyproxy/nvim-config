@@ -1,5 +1,11 @@
 vim.g.mapleader = " "
 
+-- Better navigation for wrapped lines
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, buffer = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, buffer = true })
+vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, buffer = true })
+vim.keymap.set("v", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, buffer = true })
+
 local keymap = vim.keymap -- for conciseness
 
 -- use jk to exit insert mode
@@ -50,8 +56,8 @@ vim.keymap.set("n", "<leader>rn", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<leader>rp", vim.diagnostic.goto_prev, opts)
 
 -- Show diagnostic popup on hover
-vim.o.updatetime = 250 -- ms to wait before CursorHold triggers
-vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]])
+-- vim.o.updatetime = 250 -- ms to wait before CursorHold triggers
+-- vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]])
 
 -- Go to definition
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })

@@ -17,7 +17,7 @@ return {
 				"eslint",
 				"clangd",
 				"omnisharp",
-				"neocmakelsp",
+				"neocmake",
 				"qmlls",
 			},
 		},
