@@ -1,10 +1,23 @@
 vim.g.mapleader = " "
 
 -- Better navigation for wrapped lines
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, buffer = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, buffer = true })
-vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, buffer = true })
-vim.keymap.set("v", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, buffer = true })
+-- Better navigation for wrapped lines
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set("v", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+
+vim.keymap.set("n", "<C-S-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<C-S-k>", ":m .-2<CR>==")
+vim.keymap.set("v", "<C-S-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<C-S-k>", ":m '<-2<CR>gv=gv")
+
+-- Optional mapping for convenience
+-- delete into empty register dont override yank
+vim.keymap.set({ "n", "v" }, "d", '"_d')
+vim.keymap.set({ "n", "v" }, "D", '"_D')
+vim.keymap.set({ "n", "v" }, "c", '"_c')
+vim.keymap.set({ "n", "v" }, "C", '"_C')
 
 local keymap = vim.keymap -- for conciseness
 
@@ -64,3 +77,11 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 vim.keymap.set("n", "gp", vim.lsp.buf.references, { desc = "Go to References" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Documentation" })
 -- Ctrl o go back
+
+-- Ctrl s to save
+vim.keymap.set("n", "<C-s>", ":w<CR>")
+vim.keymap.set("i", "<C-s>", "<Esc>:w<CR>a") -- insert mode
+vim.cmd([[nnoremap <silent> <C-s> :w<CR>]])
+vim.cmd([[inoremap <silent> <C-s> <Esc>:w<CR>a]])
+-- or disable flow control entirely
+vim.api.nvim_set_var("guicursor", "")
