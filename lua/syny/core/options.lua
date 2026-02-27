@@ -11,8 +11,12 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 vim.opt.foldlevel = 99
 
+-- set title so hyprland window rule can make vim solid color
+vim.opt.title = true
+vim.opt.titlestring = "nvim | %t %M (%{expand('%:p:h')})"
+
 -- transparent
-vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
+-- vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
 -- explorer tree style navigation
 vim.cmd("let g:netrw_liststyle = 3")
 local opt = vim.opt -- for conciseness
