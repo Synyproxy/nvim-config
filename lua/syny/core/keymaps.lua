@@ -35,10 +35,10 @@ keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- incremen
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
 
 -- window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
+keymap.set("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+keymap.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
 keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
@@ -49,24 +49,27 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 -- LSP
 local opts = { silent = true }
 -- floating diagnostic at cursor
-vim.keymap.set("n", "<leader>rf", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, opts)
 
 --Open location list
-
-vim.keymap.set("n", "<leader>rl", function()
-	vim.diagnostic.setloclist()
+vim.keymap.set("n", "<leader>dl", function()
+  local win = vim.fn.getloclist(0, { winid = 0 }).winid
+  if win ~= 0 then
+    vim.cmd("lclose")
+  else
+    vim.diagnostic.setloclist()
+    vim.cmd("lopen")
+  end
 end, opts)
-
---Close Location list
-vim.keymap.set("n", "<leader>rc", function()
+vim.keymap.set("n", "<leader>dc", function()
 	vim.cmd("lclose")
 end, opts)
 
 --Go next diagnostic
-vim.keymap.set("n", "<leader>rn", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, opts)
 
 --Go to prev diagnostic
-vim.keymap.set("n", "<leader>rp", vim.diagnostic.goto_prev, opts)
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, opts)
 
 -- Show diagnostic popup on hover
 -- vim.o.updatetime = 250 -- ms to wait before CursorHold triggers
@@ -74,7 +77,8 @@ vim.keymap.set("n", "<leader>rp", vim.diagnostic.goto_prev, opts)
 
 -- Go to definition
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-vim.keymap.set("n", "gp", vim.lsp.buf.references, { desc = "Go to References" })
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to References" })
+vim.keymap.set("n", "<leader>gx", "<cmd>cclose<CR>", { desc = "Close quickfix" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Documentation" })
 -- Ctrl o go back
 

@@ -6,7 +6,7 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        markdown = vim.fn.executable('markdownlint-cli2') == 1 and { 'markdownlint-cli2' } or nil,
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
