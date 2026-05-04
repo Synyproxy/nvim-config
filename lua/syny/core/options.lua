@@ -104,3 +104,10 @@ vim.o.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- turn off swapfile
 vim.o.swapfile = false
+
+-- Folding (treesitter-based)
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevel = 99        -- start with all folds open
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
