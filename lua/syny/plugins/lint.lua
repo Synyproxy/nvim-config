@@ -9,6 +9,13 @@ return {
         markdown = vim.fn.executable('markdownlint-cli2') == 1 and { 'markdownlint-cli2' } or nil,
       }
 
+      local config_path = vim.fn.expand('~/.markdownlint-cli2.yaml')
+      if vim.fn.filereadable(config_path) == 1 then
+        require('lint').linters['markdownlint-cli2'].args = {
+          '--config', config_path, '--stdin',
+        }
+      end
+
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:
       -- lint.linters_by_ft = lint.linters_by_ft or {}

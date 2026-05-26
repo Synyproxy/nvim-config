@@ -8,6 +8,14 @@ return {
 		filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
 		buf_ignore = {},
 		max_length = 99999,
+		markdown = {
+			tables = {
+				enable = true,
+				strict = false,
+				block_decorator = true,
+				use_virt_lines = true,
+			},
+		},
 	},
 },
 }
