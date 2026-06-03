@@ -9,6 +9,15 @@ return {
 		buf_ignore = {},
 		max_length = 99999,
 		markdown = {
+			headings = {
+				enable = true,
+				heading_1 = { style = "simple" },
+				heading_2 = { style = "simple" },
+				heading_3 = { style = "simple" },
+				heading_4 = { style = "simple" },
+				heading_5 = { style = "simple" },
+				heading_6 = { style = "simple" },
+			},
 			tables = {
 				enable = true,
 				strict = false,
