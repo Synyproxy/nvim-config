@@ -89,3 +89,7 @@ vim.cmd([[nnoremap <silent> <C-s> :w<CR>]])
 vim.cmd([[inoremap <silent> <C-s> <Esc>:w<CR>a]])
 -- or disable flow control entirely
 vim.api.nvim_set_var("guicursor", "")
+
+-- Escape out of terminal-insert mode (e.g. the cmake-tools build/run splits)
+-- the same way <Esc> works everywhere else, instead of needing <C-\><C-n>.
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
