@@ -13,6 +13,22 @@ return {
 	keys = {
 		{ "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
 	},
+	init = function()
+		-- When nvim is opened with a directory, neo-tree auto-opens and grabs focus.
+		-- This moves focus back to the main window so global keymaps (telescope etc.) work immediately.
+		vim.api.nvim_create_autocmd("VimEnter", {
+			callback = function()
+				if vim.fn.argc(-1) == 1 then
+					local stat = vim.uv.fs_stat(vim.fn.argv(0))
+					if stat and stat.type == "directory" then
+						vim.schedule(function()
+							vim.cmd("wincmd p")
+						end)
+					end
+				end
+			end,
+		})
+	end,
 	opts = {
 		open_files_do_not_replace_types = { "terminal", "trouble", "qf", "neo-tree" },
 		filesystem = {

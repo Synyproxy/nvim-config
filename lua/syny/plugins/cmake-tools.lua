@@ -6,6 +6,28 @@ return {
 	-- BufRead/BufNewFile on CMakeLists.txt only loads the plugin once that
 	-- specific buffer is opened, so the keymaps wouldn't exist yet anywhere else.
 	keys = {
+		{
+			"<F8>",
+			function()
+				local actions = {
+					{ label = "Build",               cmd = "CMakeBuild" },
+					{ label = "Run",                 cmd = "CMakeRun" },
+					{ label = "Debug",               cmd = "CMakeDebug" },
+					{ label = "Select Target",       cmd = "CMakeSelectLaunchTarget" },
+					{ label = "Select Build Type",   cmd = "CMakeSelectBuildType" },
+					{ label = "Generate/Configure",  cmd = "CMakeGenerate" },
+					{ label = "Clean",               cmd = "CMakeClean" },
+					{ label = "Stop",                cmd = "CMakeStop" },
+				}
+				vim.ui.select(actions, {
+					prompt = "CMake",
+					format_item = function(a) return a.label end,
+				}, function(choice)
+					if choice then vim.cmd(choice.cmd) end
+				end)
+			end,
+			desc = "CMake: Menu",
+		},
 		{ "<leader>cg", "<cmd>CMakeGenerate<CR>", desc = "CMake: Generate/Configure" },
 		{ "<leader>cb", "<cmd>CMakeBuild<CR>", desc = "CMake: Build" },
 		{ "<leader>ct", "<cmd>CMakeSelectBuildTarget<CR>", desc = "CMake: Select Build Target" },
